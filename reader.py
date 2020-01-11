@@ -88,8 +88,19 @@ def binary_search(array, low_index, high_index, expected_value):
 
 
     def get_distance(point1, point2):
-        x1 = point1[0]
-        y1 = point1[1]
-        x2 = point2[0]
-        y2 = point2[1]
+        x1 = 0
+        y1 = 0
+        x2 = 0
+        y2 = 0
+        with open("resources/firstfloorcoordinates.txt") as coordinates:
+            line = coordinates.readline()
+            while line:
+                if line.split(':')[0] == point1:
+                    x1 = line.split(':')[1].split(',')[0]
+                    y1 = line.split(':')[1].split(',')[1]
+                elif line.split(':')[0] == point2:
+                    x2 = line.split(':')[1].split(',')[0]
+                    y2 = line.split(':')[1].split(',')[1]
+                line = coordinates.readline()
+
         return math.sqrt((y2-y1)**2+(x2-x1)**2)
