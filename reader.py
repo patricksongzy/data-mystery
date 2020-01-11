@@ -56,8 +56,8 @@ class Reader:
         
         for event_time, v in self.unknown_events.items():
             for name, events in self.people.items():
-                timestamps = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
-                print(get_distance(events[timestamps[0]].location, v.location))
+                timestamp = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
+                print(get_distance(events[timestamp].location.upper(), v.location.upper()))
 
             print(event_time)
             print(v)
@@ -73,17 +73,14 @@ def binary_search(array, low_index, high_index, expected_value):
         mid_value = array[mid_index]
 
         if (mid_value == expected_value):
-            return (array[mid_index],)
+            return array[mid_index]
         elif (mid_value > expected_value):
             return binary_search(array, low_index, mid_index - 1, expected_value)
         else:
             return binary_search(array, mid_index + 1, high_index, expected_value)
     else:
-        # return the closest items
-        if (low_index >= len(array)):
-            return (array[high_index],)
-
-        return array[high_index], array[low_index]
+        # return the closest item
+        return array[high_index]
 
 
 def get_distance(point1, point2):
