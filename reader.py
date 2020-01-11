@@ -23,6 +23,15 @@ class Reader:
         return self.devices[device_type][action]
 
 
+    def logs_by_person(self, person):
+        logs = ''
+
+        for t, event in self.people[person].items():
+            logs += 'at ' + t + ', ' + event.action + ' at ' + event.location + '\n'
+        
+        print(logs)
+
+
     def setup_people(self):
         with open('resources/murder-data.json', 'r') as json_file:
             data = json.load(json_file)
@@ -47,13 +56,15 @@ class Reader:
         
         for event_time, v in self.unknown_events.items():
             for name, events in self.people.items():
-                # TODO 
+                # TODO find closest
                 timestamps = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
                 print(name)
                 print(events[timestamps[0]])
 
             print(event_time)
             print(v)
+    
+        self.logs_by_person("Veronica")
 
 
 def binary_search(array, low_index, high_index, expected_value):
