@@ -1,7 +1,7 @@
 import json
 import time
 from event import Event
-
+import math
 
 class Reader:
     def __init__(self):
@@ -85,3 +85,11 @@ def binary_search(array, low_index, high_index, expected_value):
             return (array[high_index],)
 
         return array[high_index], array[low_index]
+
+
+    def get_distance(point1, point2):
+        x1 = point1[0]
+        y1 = point1[1]
+        x2 = point2[0]
+        y2 = point2[1]
+        return math.sqrt((y2-y1)**2+(x2-x1)**2)
