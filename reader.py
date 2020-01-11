@@ -92,7 +92,7 @@ def binary_search(array, low_index, high_index, expected_value):
         y1 = 0
         x2 = 0
         y2 = 0
-        with open("resources/firstfloorcoordinates.txt") as coordinates:
+        with open("resources/floorcoordinates.txt") as coordinates:
             line = coordinates.readline()
             while line:
                 if line.split(':')[0] == point1:
