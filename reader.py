@@ -33,6 +33,20 @@ class Reader:
         
         print(logs)
 
+    def flatten():
+        final_data = []
+        with open('resources/murder-data.json','r') as json_file:
+            data = json.load(json_file)
+            for k, v in data.items():
+                final_data.append([time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(k))), 
+                                    v['device-id'], 
+                                    v['guest-id'],
+                                    False])
+                if v["event"] == "user disconnected":
+                    final_data[-1][-1] = True
+        
+        return final_data
+
 
     def setup_people(self):
         with open('resources/murder-data.json', 'r') as json_file:
@@ -61,7 +75,7 @@ class Reader:
             device_names = list(self.devices.keys())
             for i in range(len(device_names)):
                 for event_time, event in person_events.items():
-                    print(device.names[i])
+                    print(device_names[i])
                     if event.device == device_names[i]:
                         timestamps.append([i, int(time.mktime(time.strptime(event_time, '%Y-%m-%d %H:%M:%S')))])
             
@@ -96,3 +110,56 @@ def binary_search(array, low_index, high_index, expected_value):
     else:
         # return the closest item
         return array[high_index]
+
+
+def room_change(room1, room2):
+    try:
+        if (int(room1[0]) - int(room2[0]))**2 == 1:
+            return True
+        else:
+            return False
+    except:
+        if (room1[0] == 'a' and room2[0] == 'a'):
+            if int(room1[2]) - int(room2[2])**2 == 1:
+                return True
+            else:
+                return False
+
+    if room1[0] == 'a':
+        if int(room1[2]) - int(room2[0])**2 == 1:
+            return True
+        else: 
+            return False
+    
+    elif room2[0] == 'a':
+        if int(room2[2]) - int(room2[0])**2 == 1:
+            return True
+        else: 
+            return False
+
+
+def get_point(room):
+    x1=0
+    y1=0
+    with open("resources/floorcoordinates.txt") as coordinates:
+        line = coordinates.readline()
+        while line:
+            if line.split(':')[0] == room:
+                x1 = line.split(':')[1].split(',')[0]
+                y1 = line.split(':')[1].split(',')[1]
+            line = coordinates.readline()
+        if (x1+y1)==0:
+            raise ValueError("Please enter a valid room number")
+    coordinates.close()
+    return (x1,y1)
+
+def get_distance(point1, point2):
+    x1 = int(get_point(point1)[0])
+    y1 = int(get_point(point1)[1])
+    x2 = int(get_point(point2)[0])
+    y2 = int(get_point(point2)[1])
+
+    return math.sqrt((y2-y1)**2+(x2-x1)**2)
+
+reader = Reader()
+print(reader.people["Veronica"][0])
