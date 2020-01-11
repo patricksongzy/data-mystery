@@ -1,0 +1,19 @@
+{
+    "access point": {
+        "new client": false,
+        "user connected": false,
+        "user disconnected": false
+    },
+    "door sensor": {
+        "successful keycard unlock": true,
+        "unlocked no keycard": false,
+        "door closed": false
+    },
+    "motion sensor": {
+        "motion detected": false
+    },
+    "phone": {
+        "on hook": false,
+        "off hook": true
+    }
+}
