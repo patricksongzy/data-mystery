@@ -8,3 +8,6 @@ class Event:
 
     def __str__(self):
         return self.action + " at " + self.location
+
+    def set_direction(direction):
+        self.direction = direction
