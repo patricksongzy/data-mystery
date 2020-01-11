@@ -102,5 +102,11 @@ def get_distance(point1, point2):
                 x2 = line.split(':')[1].split(',')[0]
                 y2 = line.split(':')[1].split(',')[1]
             line = coordinates.readline()
-    
-    return math.sqrt((int(y2)-int(y1))**2+(int(x2)-int(x1))**2)
+        
+        if x1+y1 == 0 or x2+y2 == 0:
+            raise ValueError("Please enter a valid room number: '{}' and '{}' were not found".format(point1, point2))
+
+        return math.sqrt((y2-y1)**2+(x2-x1)**2)
+
+reader = Reader()
+print(reader.people["Veronica"][0])
