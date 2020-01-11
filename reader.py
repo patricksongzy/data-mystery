@@ -2,11 +2,13 @@ import json
 import time
 from event import Event
 import math
+import anomaly_detector
 
 class Reader:
     def __init__(self):
         self.people = {}
         self.unknown_events = {}
+        self.predicted_events = {}
         self.names = set()
         self.devices = {}
         self.read_devices()
@@ -45,7 +47,7 @@ class Reader:
 
                 is_occupied = self.is_person_occupied(device_type, action)
 
-                current_event = Event(location, action, is_occupied)
+                current_event = Event(location, device_type, action, is_occupied)
 
                 if (guest_name == 'n/a'):
                     self.unknown_events[t] = current_event
@@ -53,16 +55,29 @@ class Reader:
                     self.people[guest_name] = {t: current_event}
                 else:
                     self.people[guest_name][t] = current_event
-        
-        for event_time, v in self.unknown_events.items():
-            for name, events in self.people.items():
-                timestamp = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
-                print(get_distance(events[timestamp].location.upper(), v.location.upper()))
 
-            print(event_time)
-            print(v)
-    
-        print(get_distance("231", "235"))
+        for name, person_events in self.people.items():
+            timestamps = []
+            device_names = list(self.devices.keys())
+            for i in range(len(device_names)):
+                for event_time, event in person_events.items():
+                    print(device.names[i])
+                    if event.device == device_names[i]:
+                        timestamps.append([i, int(time.mktime(time.strptime(event_time, '%Y-%m-%d %H:%M:%S')))])
+            
+            print(timestamps)
+
+            anomaly_detector.test(timestamps)
+
+        # for event_time, v in self.unknown_events.items():
+            # if v.device == "phone":
+                # caller_name = []
+                # for name, events in self.people.items():
+                    # timestamp = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
+
+                    # if events[timestamp].location.replace("ap1-4", "lobby") == v.location:
+                        # caller_name.append(name)
+
         self.logs_by_person("Veronica")
 
 
@@ -81,30 +96,3 @@ def binary_search(array, low_index, high_index, expected_value):
     else:
         # return the closest item
         return array[high_index]
-
-
-    def get_point(room):
-        x1=0
-        y1=0
-        with open("resources/floorcoordinates.txt") as coordinates:
-            line = coordinates.readline()
-            while line:
-                if line.split(':')[0] == point1:
-                    x1 = line.split(':')[1].split(',')[0]
-                    y1 = line.split(':')[1].split(',')[1]
-                line = coordinates.readline()
-            if (x1+y1)==0:
-                raise ValueError("Please enter a valid room number")
-        coordinates.close()
-        return (x1,y1)
-
-    def get_distance(point1, point2):
-        x1 = get_point(point1)[0]
-        y1 = get_point(point1)[1]
-        x2 = get_point(point2)[0]
-        y2 = get_point(point2)[1]
-
-        return math.sqrt((y2-y1)**2+(x2-x1)**2)
-
-reader = Reader()
-print(reader.people["Veronica"][0])
