@@ -197,8 +197,8 @@ def get_point(room):
         line = coordinates.readline()
         while line:
             if line.split(':')[0] == room:
-                x1 = line.split(':')[1].split(',')[0]
-                y1 = line.split(':')[1].split(',')[1]
+                x1 = int(line.split(':')[1].split(',')[0])
+                y1 = int(line.split(':')[1].split(',')[1])
             line = coordinates.readline()
         if (x1+y1)==0:
             raise ValueError("Please enter a valid room number: '{}' was not found".format(room))
@@ -206,9 +206,9 @@ def get_point(room):
     return (x1,y1)
 
 def get_distance(point1, point2):
-    x1 = int(get_point(point1)[0])
-    y1 = int(get_point(point1)[1])
-    x2 = int(get_point(point2)[0])
-    y2 = int(get_point(point2)[1])
+    x1 = get_point(point1)[0]
+    y1 = get_point(point1)[1]
+    x2 = get_point(point2)[0]
+    y2 = get_point(point2)[1]
 
     return math.sqrt((y2-y1)**2+(x2-x1)**2)
