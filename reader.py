@@ -8,12 +8,14 @@ import anomaly_detector
 class Reader:
     def __init__(self):
         self.people = {}
+        self.flattened = []
         self.unknown_events = {}
         self.predicted_events = {}
         self.names = set()
         self.devices = {}
         self.read_devices()
         self.setup_people()
+        self.flatten()
 
     def read_devices(self):
         with open('resources/devices.json', 'r') as json_file:
@@ -34,16 +36,13 @@ class Reader:
         
         print(logs)
 
-    def flatten():
-        final_data = []
-        with open('resources/murder-data.json','r') as json_file:
-            data = json.load(json_file)
-            for k, v in data.items():
-                final_data.append([time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(k))), v['device-id'],v['guest-id']])
-                if v["event"] == "user disconnected":
-                    final_data[-1][1] = 'na'
+    def flatten(self):
+        # returns [[time, place name]]
+        for name, person_events in self.people.items():
+            for event_time, event in person_events.items():
+                self.flattened.append([event_time, event.location, name])
         
-        return final_data
+        self.flattened = sorted(self.flattened)
 
 
     def setup_people(self):
