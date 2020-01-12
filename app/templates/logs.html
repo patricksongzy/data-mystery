@@ -1,0 +1,192 @@
+<head>
+    <title>Logs</title>
+    <script src="../static/script.js"></script>
+</head>
+
+<body onload="insertBreaks('{{logs}}')">
+    <div class="window">
+        <a id="home"href="/">Exit</img></a>
+        <a id="top" href="#dave">Back to top</a>
+        <div class="navbar">
+            <a href="#Dave">Dave</a>
+            <a href="#Thomas">Thomas</a>
+            <a href="#Harrison">Harrison</a>
+            <a href="#Rob">Rob</a>
+            <a href="#Alok">Alok</a>
+            <a href="#Kristina">Kristina</a>
+            <a href="#Veronica">Veronica</a>
+            <a href="#Eugene">Eugene</a>
+            <a href="#Jason">Jason</a>
+            <a href="#Marc-Andre">Marc-Andre</a>
+            <a href="#Salina">Salina</a>
+            <a href="#Unknown">Unknown</a>
+        </div>
+        <div class="logs">
+            <div id="Dave"><label>Dave's Logs</label></div>
+            <div id="Thomas"><label>Thomas' Logs</label></div>
+            <div id="Harrison"><label>Harrison's Logs</label></div>
+            <div id="Rob"><label>Rob's Logs</label></div>
+            <div id="Alok"><label>Alok's Logs</label></div>
+            <div id="Kristina"><label>Kristina's Logs</label></div>
+            <div id="Veronica"><label>Veronica's Logs</label></div>
+            <div id="Eugene"><label>Eugene's Logs</label></div>
+            <div id="Jason"><label>Jason's Logs</label></div>
+            <div id="Marc-Andre"><label>Marc-Andre's Logs</label></div>
+            <div id="Salina"><label>Salina's Logs</label></div>
+            <div id="Unknown"><label>Unknown Logs</label></div>
+        </div>
+    </div>
+    <style>
+        .window {
+            height:auto;
+            width: 99.2vw;
+        }
+
+        #home {
+            height: 20px;
+            width: 40px;
+            text-align: center;
+            background-color: gray;
+            border: 2px solid black;
+            border-radius: 2px;
+            padding: 5px;
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            cursor: url("../static/images/exitdoor.png"), auto;
+            position: absolute;
+            top: 0px;
+            right: 2px;
+        }
+
+        #top {
+            height: 20px;
+            width: 100px;
+            text-align: center;
+            position: fixed;
+            background-color: gray;
+            border: 2px solid black;
+            border-radius: 2px;
+            padding: 5px;
+            text-decoration: none;
+            display: inline-block;
+            color: white;
+            right: 5px;
+            bottom: 5px;
+        }
+
+        #top:hover {
+            cursor: pointer;
+            background-color: white;
+            color: black;
+        }
+
+        .navbar {
+            float: left;
+            width: 20%;
+            height: 100%;
+        }
+
+        .navbar a {
+            background-color: gray;
+            border: 2px solid red;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 30px;
+            color: white;
+            width: 80%;
+            height: calc(8.3% - 25px);
+        }
+
+        .navbar a:hover {
+            background-color: red;
+            color: black;
+        }
+
+        .logs {
+            float: left;
+            width: 80%;
+        }
+
+        #dave {
+            margin-top: 0%;
+        }
+
+        .logs div {
+            margin-top: 2%;
+            width: 100%;
+            transition: background-color 0.5s;
+        }
+
+        .logs div:hover {
+            background-color: lightgray;
+        }
+
+        .logs div label {
+            font-size: 40px;
+            text-decoration: underline;
+            color: red;
+        }
+
+        .logs div p {
+            color: gray;
+        }
+
+        .text label {
+            display: block;
+            font-family: 'SansSerif';
+            font-size: 100px;
+            margin-top: 5%;
+            margin-left: 20%;
+            color: lightgray;
+            position: static;
+            z-index: 2;
+        }
+
+        #blood {
+            position: absolute;
+            z-index: 1;
+            left: 30%;
+            top: 2%;
+        }
+
+        #murder {
+            color: red;
+            font-style: italic;
+            font-size: 150px;
+        }
+
+        .buttons {
+            float: left;
+            width: 30%;
+            height: 100%;
+            background-color: black;
+            z-index: 0;
+        }
+
+        .buttons form {
+            width: 100%;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15%;
+            background-color: gray;
+            border: white solid 2px;
+            border-radius: 8px;
+            height: 100px;
+            width: 70%;
+            font-size: 40px;
+            font-family: 'SansSerif'
+        }
+
+        button:hover {
+            background-color: black;
+            color: red;
+            font-size: 60px;
+            cursor: url("../static/images/glass.png"), auto;
+        }
+    </style>
+</body>
