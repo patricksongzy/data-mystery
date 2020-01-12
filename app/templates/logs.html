@@ -1,0 +1,130 @@
+<head>
+    <title>Logs</title>
+</head>
+
+<body>
+    <div class="window">
+        <div class="navbar">
+            <div><a href="#dave">Dave</a></div>
+            <div><a href="#thomas">Thomas</a></div>
+            <div><a href="#harrison">Harrison</a></div>
+            <div><a href="#rob">Rob</a></div>
+            <div><a href="#alok">Alok</a></div>
+            <div><a href="#kristina">Kristina</a></div>
+            <div><a href="#veronica">Veronica</a></div>
+            <div><a href="#james">James</a></div>
+            <div><a href="eugene">Eugene</a></div>
+            <div><a href="#jason">Jason</a></div>
+            <div><a href="#marcandre">Marc-Andre</a></div>
+            <div><a href="#salina">Salina</a></div>
+            <div><a href="#unknown">Unknown</a></div>
+        </div>
+        <div class="logs">
+            <div id="dave"><label>Dave's Logs</label>
+                <p> {{ people[dave] }} </p>
+            </div>
+            <div id="thomas"><label>Thomas' Logs</label>
+                <p> {{  }} </p>
+            </div>
+            <div id="harrison"><label>Harrison's Logs</label>
+                <p></p>
+            </div>
+            <div id="rob"><label>Rob's Logs</label>
+                <p></p>
+            </div>
+            <div id="alok"><label>Alok's Logs</label>
+                <p></p>
+            </div>
+            <div id="kristina"><label>Kristina's Logs</label>
+                <p></p>
+            </div>
+            <div id="veronica"><label>Veronica's Logs</label>
+                <p></p>
+            </div>
+            <div id="james"><label>James' Logs</label>
+                <p></p>
+            </div>
+            <div id="eugene"><label>Eugene's Logs</label>
+                <p></p>
+            </div>
+            <div id="jason"><label>Jason's Logs</label>
+                <p></p>
+            </div>
+            <div id="marcandre"><label>Marc-Andre's Logs</label>
+                <p></p>
+            </div>
+            <div id="salina"><label>Salina's Logs</label>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <style>
+        .window {
+            height: 97.5vh;
+            width: 99.2vw;
+        }
+
+        .navbar {
+            float: left;
+            width: 70%;
+            height: 100%;
+            background-color: black;
+            z-index: 0;
+        }
+
+        .text label {
+            display: block;
+            font-family: 'SansSerif';
+            font-size: 100px;
+            margin-top: 5%;
+            margin-left: 20%;
+            color: lightgray;
+            position: static;
+            z-index: 2;
+        }
+
+        #blood {
+            position: absolute;
+            z-index: 1;
+            left: 30%;
+            top: 2%;
+        }
+
+        #murder {
+            color: red;
+            font-style: italic;
+            font-size: 150px;
+        }
+
+        .buttons {
+            float: left;
+            width: 30%;
+            height: 100%;
+            background-color: black;
+            z-index: 0;
+        }
+
+        .buttons form {
+            width: 100%;
+            text-align: center;
+        }
+
+        button {
+            margin-top: 15%;
+            background-color: gray;
+            border: white solid 2px;
+            border-radius: 8px;
+            height: 100px;
+            width: 70%;
+            font-size: 40px;
+            font-family: 'SansSerif'
+        }
+
+        button:hover {
+            background-color: black;
+            color: red;
+            font-size: 60px;
+            cursor: url("../static/images/glass.png"), auto;
+        }
+    </style>
+</body>
