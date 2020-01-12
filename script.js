@@ -11,7 +11,7 @@ function MakeVisible(name) {
 function update(i){
 	
 	var a = ["8:00", "API11", "Dave"];
-	var b = ["8:05", "API12", "Dave"];
+	var b = ["8:05", "na", "Dave"];
 	var c = ["8:10", "API13", "Dave"];
 	var d = ["8:15", "API14", "Dave"];
 	var e = ["8:15", "101", "Dave"];
@@ -32,25 +32,24 @@ function update(i){
 	var event;
 	
 	function myLoop () {   
-		if(!checkIfPaused){
 			
 			setTimeout(function () {  
 			
 				event = events[i];
 				
-				if(event[1]=="API11"){
+				if(event[1]=="ap1-1"){
 					
 					moveToAPI11(event[2]); 
 				}
-				else if(event[1]=="API12"){
+				else if(event[1]=="ap1-2"){
 					
 					moveToAPI12(event[2]);	
 					
-				}else if(event[1]=="API13"){
+				}else if(event[1]=="ap1-3"){
 					
 					moveToAPI13(event[2]);
 					
-				}else if(event[1]=="API14"){
+				}else if(event[1]=="ap1-4"){
 					
 					moveToAPI14(event[2]);
 						
@@ -105,166 +104,252 @@ function update(i){
 				}else if(event[1]=="Elevator"){
 					
 					moveToElevator(event[2]);
-				}			
+				}else if(event[1]=="210"){
+					
+					moveTo210(event[2]);
+				}else if(event[1]=="231"){
+					
+					moveTo231(event[2]);
+				}else if(event[1]=="233"){
+					
+					moveTo233(event[2]);
+				}else if(event[1]=="235"){
+					
+					moveTo235(event[2]);
+				}else if(event[1]=="241"){
+					
+					moveTo241(event[2]);
+				}else if(event[1]=="247"){
+					
+					moveTo247(event[2]);
+				}else if(event[1]=="250"){
+					
+					moveTo250(event[2]);
+				}else if(event[1]=="ap2-2"){
+					
+					moveToAPI22(event[2]);
+				}else if(event[1]=="200"){
+					
+					moveTo200(event[2]);
+				}else if(event[1]=="ap2-3"){
+					
+					moveToAPI23(event[2]);
+				}else if(event[1]=="Elevator2"){
+					
+					moveToElevator2(event[2]);
+				}else if(event[1]=="ap2-1"){
+					
+					moveToAPI21(event[2]);
+				}else if(event[1]=="220"){
+					
+					moveTo220(event[2]);
+				}else if(event[1]=="232"){
+					
+					moveTo232(event[2]);
+				}else if(event[1]=="236"){
+					
+					moveTo236(event[2]);
+				}else if(event[1]=="244"){
+					
+					moveTo244(event[2]);
+				}else if(event[1]=="248"){
+					
+					moveTo248(event[2]);
+				}else if(event[1]=="ice machine"){
+					
+					moveToIceMachine(event[2]);
+				}else if(event[1]=="n/a"){
+					
+					removeFromScene(event[2]);
+				}												
 				i++;                     
 				if (i < events.length) {            
 					myLoop();            
 				}                        
 			}, 1000)
 		}
-	}
+	
 	myLoop();    
 	
 }
 
-function pause(){
-	checkIfPaused(true);
+
+
+function removeFromScene(location){
+	document.getElementById(location)style.visibility = "hidden";
 }
-
-function checkIfPaused(boolean pause){
-	return pause;
-}
-
-
-
-		
 function moveToElevator(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "285px";
 	document.getElementById(location).style.top = "150px";
 }
 function moveTo150(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "570px";
 	document.getElementById(location).style.top = "150px";
 }
 function moveTo105(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "285px";
 	document.getElementById(location).style.top = "210px";
 }
 function moveTo130(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "145px";
 	document.getElementById(location).style.top = "230px";
 }
 function moveTo110(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "145px";
 	document.getElementById(location).style.top = "100px";
 }
 function moveTo100(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "283px";
 	document.getElementById(location).style.top = "30px";
 }
 function moveTo101(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "408px";
 	document.getElementById(location).style.top = "20px";
 }
 function moveTo151(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "408px";
 	document.getElementById(location).style.top = "70px";
 }
 function moveTo155(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "500px";
 	document.getElementById(location).style.top = "70px";
 }
 function moveTo152(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "395px";
 	document.getElementById(location).style.top = "250px";
 }
 function moveTo154(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "455px";
 	document.getElementById(location).style.top = "250px";
 }
 function moveTo156(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "515px";
 	document.getElementById(location).style.top = "205px";
 }
 function moveTo156B(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "515px";
 	document.getElementById(location).style.top = "257px";
 }
 function moveToAPI11(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "145px";
 	document.getElementById(location).style.top = "125px";
 }
 function moveToAPI12(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "457px";
 	document.getElementById(location).style.top = "147px";
 }
 function moveToAPI13(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "283px";
 	document.getElementById(location).style.top = "260px";
 }
 function moveToAPI14(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "283px";
 	document.getElementById(location).style.top = "70px";
 }
 function moveTo210(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "760px";
 	document.getElementById(location).style.top = "43px";
 }
 function moveTo231(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "833px";
 	document.getElementById(location).style.top = "43px";
 }
 function moveTo233(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "910px";
 	document.getElementById(location).style.top = "43px";
 }
 function moveTo235(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "986px";
 	document.getElementById(location).style.top = "43px";
 }
 function moveTo241(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1061px";
 	document.getElementById(location).style.top = "48px";
 }
 function moveTo247(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1134px";
 	document.getElementById(location).style.top = "48px";
 }
 function moveTo250(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1200px";
 	document.getElementById(location).style.top = "140px";
 }
 function moveToAPI22(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1100px";
 	document.getElementById(location).style.top = "145px";
 }
 function moveTo200(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1045px";
 	document.getElementById(location).style.top = "145px";
 }
 function moveToAPI23(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "993px";
 	document.getElementById(location).style.top = "145px";
 }
 function moveToElevator2(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "914px";
 	document.getElementById(location).style.top = "145px";
 }
 function moveToAPI21(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "838px";
 	document.getElementById(location).style.top = "145px";
 }
 function moveTo220(location){ 
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "760px";
 	document.getElementById(location).style.top = "210px";
 }
 function moveTo232(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "835px";
 	document.getElementById(location).style.top = "244px";
 }
 function moveTo236(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "993px";
 	document.getElementById(location).style.top = "244px";
 }
 function moveTo244(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1062px";
 	document.getElementById(location).style.top = "230px";
 }
 function moveTo248(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "1137px";
 	document.getElementById(location).style.top = "230px";
 }
 function moveToIceMachine(location){
+	document.getElementById(location)style.visibility = "visible";
 	document.getElementById(location).style.left = "916px";
 	document.getElementById(location).style.top = "213px";
 }
