@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import json
 import time
 from event import Event
@@ -49,6 +50,8 @@ class Reader:
 
 
     def setup_people(self):
+        door_close_queue = {}
+
         with open('resources/murder-data.json', 'r') as json_file:
             data = json.load(json_file)
             for k, v in data.items():
@@ -64,24 +67,37 @@ class Reader:
                 current_event = Event(location, device_type, action, is_occupied)
 
                 if (guest_name == 'n/a'):
+                    if (device_type == 'door sensor' and location in door_close_queue):
+                        door_closer = door_close_queue.pop(location)
+                        self.people[door_closer][t] = current_event
+                    elif (action == 'unlocked no keycard'):
+                        for name, person_events in self.people.items():
+                            timestamp = binary_search(list(person_events.keys()), 0, len(person_events) - 1, t)
+                            if (person_events[timestamp].location == location):
+                                self.people[name][t] = current_event
+                                break
+
                     self.unknown_events[t] = current_event
-                elif (guest_name not in self.people):
-                    self.people[guest_name] = {t: current_event}
                 else:
-                    self.people[guest_name][t] = current_event
+                    if (device_type == 'door sensor'):
+                        door_close_queue[location] = guest_name
 
+                    if (guest_name not in self.people):
+                        self.people[guest_name] = {t: current_event}
+                    else:
+                        self.people[guest_name][t] = current_event
+                
+        door_occurences = {}
+        device_names = list(self.devices.keys())
         for name, person_events in self.people.items():
-            timestamps = []
-            device_names = list(self.devices.keys())
-            for i in range(len(device_names)):
-                for event_time, event in person_events.items():
-                    print(device_names[i])
-                    if event.device == device_names[i]:
-                        timestamps.append([i, int(time.mktime(time.strptime(event_time, '%Y-%m-%d %H:%M:%S')))])
-            
-            print(timestamps)
+            for event_time, event in person_events.items():
+                if event.device == 'door sensor':
+                    door_occurences[int(time.mktime(time.strptime(event_time, '%Y-%m-%d %H:%M:%S')))] = [name, event]
 
-            anomaly_detector.test(timestamps)
+        door_occurences = OrderedDict(sorted(door_occurences.items()))
+        for t, event_details in door_occurences.items():
+            # if event.action == 'unlocked no keycard':
+            print(str(t) + ": " + event_details[0] + " " + str(event_details[1]))
 
         # for event_time, v in self.unknown_events.items():
             # if v.device == "phone":
@@ -160,6 +176,3 @@ def get_distance(point1, point2):
     y2 = int(get_point(point2)[1])
 
     return math.sqrt((y2-y1)**2+(x2-x1)**2)
-
-reader = Reader()
-print(reader.people["Veronica"][0])
