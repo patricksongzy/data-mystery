@@ -1,0 +1,68 @@
+.window {
+    height: 97.5vh;
+    width: 99.2vw;
+    z-index: 0;
+}
+
+.text {
+    float: left;
+    width: 70%;
+    height: 100%;
+    background-color: black;
+    z-index: 0;
+}
+
+.text label {
+    display: block;
+    font-family: 'SansSerif';
+    font-size: 100px;
+    margin-top: 5%;
+    margin-left: 20%;
+    color: lightgray;
+    position: static;
+    z-index: 2;
+}
+
+#blood {
+    position: absolute;
+    z-index: 1;
+    left: 30%;
+    top: 2%;
+}
+
+#murder {
+    color: red;
+    font-style: italic;
+    font-size: 150px;
+}
+
+.buttons {
+    float: left;
+    width: 30%;
+    height: 100%;
+    background-color: black;
+    z-index: 0;
+}
+
+.buttons form {
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    margin-top: 15%;
+    background-color: gray;
+    border: white solid 2px;
+    border-radius: 8px;
+    height: 100px;
+    width: 70%;
+    font-size: 40px;
+    font-family: 'SansSerif'
+}
+
+button:hover {
+    background-color: black;
+    color: red;
+    font-size: 60px;
+    cursor: url("../static/images/glass.png"), auto;
+}

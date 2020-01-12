@@ -5,7 +5,8 @@ function insertBreaks(json) {
 			line.textContent = json[key][i];
 			line.display = 'block';
 
-			container = document.querySelector('#' + key.toLowerCase());
+			container = document.querySelector('#' + key);
+			console.log(container)
 			container.appendChild(line);
 		}
     }
@@ -30,26 +31,7 @@ function MakeVisible(name) {
 
 
 function update(i, events){
-	
-	var a = ["8:00", "API11", "Dave"];
-	var b = ["8:05", "na", "Dave"];
-	var c = ["8:10", "API13", "Dave"];
-	var d = ["8:15", "API14", "Dave"];
-	var e = ["8:15", "101", "Dave"];
-	var f = ["8:15", "151", "Dave"];
-	var g = ["8:15", "155", "Dave"];
-	var h = ["8:15", "150", "Dave"];
-	var j = ["8:15", "156", "Dave"];
-	var k = ["8:15", "156B", "Dave"];
-	var l = ["8:15", "154", "Dave"];
-	var m = ["8:15", "152", "Dave"];
-	var n = ["8:15", "105", "Dave"];
-	var o = ["8:15", "130", "Dave"];
-	var p = ["8:15", "110", "Dave"];
-	var q = ["8:15", "100", "Dave"];
-	var r = ["8:15", "Elevator", "Dave"];
             
-    //console.log(events);
     events = convertJSON(events);
 	var event;
 	
