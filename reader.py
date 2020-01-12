@@ -44,6 +44,8 @@ class Reader:
                     x2 = line.split(':')[1].split(',')[0]
                     y2 = line.split(':')[1].split(',')[1]
                 line = coordinates.readline()
+            if x1+y1 == 0 or x2+y2 == 0:
+                raise ValueError("Please enter a valid room number")
 
         return math.sqrt((y2-y1)**2+(x2-x1)**2)
 
