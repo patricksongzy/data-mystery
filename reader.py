@@ -33,7 +33,7 @@ class Reader:
         
         print(logs)
 
-    def flatten():
+    def flatten(self):
         final_data = []
         with open('resources/murder-data.json','r') as json_file:
             data = json.load(json_file)
