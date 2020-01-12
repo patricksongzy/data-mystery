@@ -39,6 +39,10 @@ class Reader:
 
 
     def logs_by_person(self, person):
+        '''Prints out the logs for a person.
+        Parameters:
+        person (String): The person to print the logs out for
+        '''
         logs = ''
 
         for t, event in self.people[person].items():
@@ -47,7 +51,7 @@ class Reader:
         print(logs)
 
     def flatten(self):
-        '''returns [[time, place name]] for animation'''
+        '''Sets up flattened as [[time, place name]] for animation'''
         for name, person_events in self.people.items():
             for event_time, event in person_events.items():
                 self.flattened.append([event_time, event.location, name])
@@ -56,6 +60,7 @@ class Reader:
 
 
     def setup_people(self):
+        '''Sets up people dictionary in Person{time:Event} format'''
         door_close_queue = {}
 
         # creates a map of events per person, per timestamp.
@@ -138,6 +143,7 @@ class Reader:
 
 
 def binary_search(array, low_index, high_index, expected_value):
+    '''Searches recursively through list for a value'''
     if (high_index >= low_index):
         # nearly every binary search has a bug
         mid_index = low_index + ((high_index - low_index) // 2)
