@@ -110,19 +110,23 @@ class Reader:
 
                     print("DOOR IS HELD with distance {} for person {}!".format(minimum, held_for))
                 
-                held_door_queue[event.location] = name
+                held_door_queue[event.location] = [name, t]
             elif (event.action == 'successful keycard unlock'):
-                if event.location in held_door_queue and held_door_queue[event.location] == name:
+                if event.location in held_door_queue and held_door_queue[event.location][0] == name:
+                    close_time = int(time.mktime(time.strptime(t, '%Y-%m-%d %H:%M:%S')))
+                    open_time = int(time.mktime(time.strptime(held_door_queue[event.location][1], '%Y-%m-%d %H:%M:%S')))
+                    if (close_time - open_time > 200):
+                        for other_name, person_events in self.people.items():
+                            if other_name != name:
+                                timestamp = binary_search(list(person_events.keys()), 0, len(person_events) - 1, t)
+                                distance = get_distance(person_events[timestamp].location, event.location)
+                                if distance != 0 and distance < minimum and not person_events[timestamp].is_occupied:
+                                    minimum = distance
+                                    held_for = other_name
+
+                        print("DOOR IS HELD FROM OUTSIDE with distance {} for person {}!".format(minimum, held_for))
+
                     held_door_queue.pop(event.location)
-
-        # for event_time, v in self.unknown_events.items():
-            # if v.device == "phone":
-                # caller_name = []
-                # for name, events in self.people.items():
-                    # timestamp = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
-
-                    # if events[timestamp].location.replace("ap1-4", "lobby") == v.location:
-                        # caller_name.append(name)
 
         self.logs_by_person("Veronica")
 
