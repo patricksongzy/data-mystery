@@ -87,20 +87,25 @@ def binary_search(array, low_index, high_index, expected_value):
         return array[high_index], array[low_index]
 
 
-    def get_distance(point1, point2):
-        x1 = 0
-        y1 = 0
-        x2 = 0
-        y2 = 0
+    def get_point(room):
+        x1=0
+        y1=0
         with open("resources/floorcoordinates.txt") as coordinates:
             line = coordinates.readline()
             while line:
                 if line.split(':')[0] == point1:
                     x1 = line.split(':')[1].split(',')[0]
                     y1 = line.split(':')[1].split(',')[1]
-                elif line.split(':')[0] == point2:
-                    x2 = line.split(':')[1].split(',')[0]
-                    y2 = line.split(':')[1].split(',')[1]
                 line = coordinates.readline()
+            if (x1+y1)==0:
+                raise ValueError("Please enter a valid room number")
+        coordinates.close()
+        return (x1,y1)
+
+    def get_distance(point1, point2):
+        x1 = get_point(point1)[0]
+        y1 = get_point(point1)[1]
+        x2 = get_point(point2)[0]
+        y2 = get_point(point2)[1]
 
         return math.sqrt((y2-y1)**2+(x2-x1)**2)
