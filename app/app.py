@@ -1,5 +1,5 @@
 from flask import *
-from reader import Reader
+from reader2 import Reader
 import time
 
 app = Flask(__name__)
@@ -13,7 +13,9 @@ def home():
 @app.route('/logs')
 def logs():
     logs = reader.people_logs
+    print(logs)
     for key, value in logs.items():
+        # print(key, value)
         logs[key] = value.split('\n')
     print(logs)
     logs_json = json.dumps(logs)

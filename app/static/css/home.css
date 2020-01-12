@@ -64,5 +64,5 @@ button:hover {
     background-color: black;
     color: red;
     font-size: 60px;
-    cursor: url("../static/images/glass.png"), auto;
+    cursor: url("../images/glass.png"), auto;
 }
