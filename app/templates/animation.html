@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="../static/css/CssStyles.css">
+
+<html>
+	<body>
+		<div id = "time"></div>
+	
+    <script src="../static/script.js"></script>
+    
+		<table class = "scene1">
+		<tr>
+		<td class = "main">
+			
+				<img class = "parent" src="../static/images/floor1.jpg" width="629px" height="270px">
+		</td>
+		<td class = "main">
+				<img class = "parent" src="../static/images/floor2.jpg" width="629px" height="270px">
+		</td>
+		</tr>
+		</table>
+		
+		
+		<img id = "Dave" alt = "Dave" class = "child" src="../static/images/blackcircle.png">
+		<img id = "Thomas" alt = "Thomas" class = "child" src="../static/images/bluecircle.png">
+		<img id = "Harrison" alt = "Harrison" class = "child" src="../static/images/bluegradingcircle.png">
+		<img id = "Rob" alt = "Rob" class = "child" src="../static/images/browncircle.png">
+		<img id = "Alok" alt = "Alok" class = "child" src="../static/images/greencircle.png">
+		<img id = "Kristina" alt = "Kristina" class = "child" src="../static/images/greengradingcircle.png">
+		<img id = "Veronica" alt = "Veronica" class = "child" src="../static/images/greengradingcircle2.png">
+		<img id = "James" alt = "James" class = "child" src="../static/images/greycircle.png">
+		<img id = "Eugene" alt = "Eugene" class = "child" src="../static/images/orangecircle.png">
+		<img id = "Jason" alt = "Jason" class = "child" src="../static/images/orangegradingcircle.png">
+		<img id = "Marc-Andre" alt = "Marc-Andre" class = "child" src="../static/images/pinkcircle.png">
+		<img id = "Salina" alt = "Salina" class = "child" src="../static/images/redcircle.png">
+		<img id = "n/a" alt = "Uknown" class = "child" src="../static/images/yellowcircle.png">
+		
+		<button onclick="MakeVisible('Dave')" onmouseover="MakeLarger('Dave')" onmouseleave="MakeSmaller('Dave')">Dave</button>
+		<button onclick="MakeVisible('Thomas')" onmouseover="MakeLarger('Thomas')" onmouseleave="MakeSmaller('Thomas')">Thomas</button>
+		<button onclick="MakeVisible('Harrison')" onmouseover="MakeLarger('Harrison')" onmouseleave="MakeSmaller('Harrison')">Harrison</button>
+		<button onclick="MakeVisible('Rob')" onmouseover="MakeLarger('Rob')" onmouseleave="MakeSmaller('Rob')">Rob</button>
+		<button onclick="MakeVisible('Alok')" onmouseover="MakeLarger('Alok')" onmouseleave="MakeSmaller('Alok')">Alok</button>
+		<button onclick="MakeVisible('Kristina')" onmouseover="MakeLarger('Kristina')" onmouseleave="MakeSmaller('Kristina')">Kristina</button>
+		<button onclick="MakeVisible('James')" onmouseover="MakeLarger('James')" onmouseleave="MakeSmaller('James')">James</button>
+		<button onclick="MakeVisible('Eugene')" onmouseover="MakeLarger('Eugene')" onmouseleave="MakeSmaller('Eugene')">Eugene</button>
+		<button onclick="MakeVisible('Veronica')" onmouseover="MakeLarger('Veronica')" onmouseleave="MakeSmaller('Veronica')">Veronica</button>		
+		<button onclick="MakeVisible('Jason')" onmouseover="MakeLarger('Jason')" onmouseleave="MakeSmaller('Jason')">Jason</button>
+		<button onclick="MakeVisible('Marc-Andre')" onmouseover="MakeLarger('Marc-Andre')" onmouseleave="MakeSmaller('Marc-Andre')">Marc-Andre</button>
+		<button onclick="MakeVisible('Salina')" onmouseover="MakeLarger('Salina')" onmouseleave="MakeSmaller('Salina')">Salina</button>
+		<button onclick="MakeVisible('n/a')" onmouseover="MakeLarger('n/a')" onmouseleave="MakeSmaller('n/a')">Unknown</button>
+		
+		
+		</br>
+        <button onclick="update(0, '{{events}}')">Play</button>
+		
+
+	</body>
+</html>

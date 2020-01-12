@@ -1,0 +1,97 @@
+.window {
+    height:auto;
+    width: 99.2vw;
+}
+
+#home {
+    height: 20px;
+    width: 40px;
+    text-align: center;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 2px;
+    padding: 5px;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    cursor: url("../images/exitdoor.png"), auto;
+    position: absolute;
+    top: 0px;
+    right: 2px;
+}
+
+#top {
+    height: 20px;
+    width: 100px;
+    text-align: center;
+    position: fixed;
+    background-color: gray;
+    border: 2px solid black;
+    border-radius: 2px;
+    padding: 5px;
+    text-decoration: none;
+    display: inline-block;
+    color: white;
+    right: 5px;
+    bottom: 5px;
+}
+
+#top:hover {
+    cursor: pointer;
+    background-color: white;
+    color: black;
+}
+
+.navbar {
+    float: left;
+    width: 20%;
+    height: 100%;
+}
+
+.navbar a {
+    background-color: gray;
+    border: 2px solid red;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    color: white;
+    width: 80%;
+    height: calc(8.3% - 25px);
+}
+
+.navbar a:hover {
+    background-color: red;
+    color: black;
+}
+
+.logs {
+    float: left;
+    width: 80%;
+}
+
+#dave {
+    margin-top: 0%;
+}
+
+.logs div {
+    margin-top: 2%;
+    width: 100%;
+    transition: background-color 0.5s;
+}
+
+.logs div:hover {
+    background-color: lightgray;
+}
+
+.logs div label {
+    font-size: 40px;
+    text-decoration: underline;
+    color: red;
+    display: block;
+}
+
+.logs div p {
+    color: gray;
+}
