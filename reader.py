@@ -104,15 +104,16 @@ class Reader:
                         if other_name != name:
                             timestamp = binary_search(list(person_events.keys()), 0, len(person_events) - 1, t)
                             distance = get_distance(person_events[timestamp].location, event.location)
-                            if distance < minimum:
+                            if distance < minimum and not person_events[timestamp].is_occupied:
                                 minimum = distance
                                 held_for = other_name
+
                     print("DOOR IS HELD with distance {} for person {}!".format(minimum, held_for))
                 
                 held_door_queue[event.location] = name
             elif (event.action == 'successful keycard unlock'):
                 if event.location in held_door_queue and held_door_queue[event.location] == name:
-                    held_door_queue.pop(event.location)            
+                    held_door_queue.pop(event.location)
 
         # for event_time, v in self.unknown_events.items():
             # if v.device == "phone":
