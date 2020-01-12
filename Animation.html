@@ -2,20 +2,18 @@
 <link rel="stylesheet" href="./Css/CssStyles.css">
 <html>
 	<body>
-	<table class = "navigationBar">
-	  
-	</table>
-	<button onclick="DaveVisible()">Dave</button>
-	<button onclick="update(0)">Play</button>
+	<button style="visibility:hidden;"></button>
+	
 	
 	<script>
-		function DaveVisible() {
-		var x = document.getElementById('Dave');
+		function MakeVisible(name) {
+		var x = document.getElementById(name);
 		if(x.style.visibility == "visible")
 			x.style.visibility = "hidden";
 		 else
 			x.style.visibility = "visible";
 		}
+		
 	</script>
 
 
@@ -32,10 +30,37 @@
 		</table>
 		
 		
-		<img id = "Dave" class = "child" src="./Images/bluecircle.png">
-		<img id = "Jason" class = "child" src="./Images/redcircle.png">
+		<img id = "Dave" class = "child" src="./Images/blackcircle.png">
+		<img id = "Thomas" class = "child" src="./Images/bluecircle.png">
+		<img id = "Harrison" class = "child" src="./Images/bluegradingcircle.png">
+		<img id = "Rob" class = "child" src="./Images/browncircle.png">
+		<img id = "Alok" class = "child" src="./Images/greencircle.png">
+		<img id = "Kristina" class = "child" src="./Images/greengradingcircle.png">
+		<img id = "Veronica" class = "child" src="./Images/greengradingcircle2.png">
+		<img id = "James" class = "child" src="./Images/greycircle.png">
+		<img id = "Eugene" class = "child" src="./Images/orangecircle.png">
+		<img id = "Jason" class = "child" src="./Images/orangegradingcircle.png">
+		<img id = "Marcandre" class = "child" src="./Images/pinkcircle.png">
+		<img id = "Salina" class = "child" src="./Images/redcircle.png">
+		<img id = "Unknown" class = "child" src="./Images/yellowcircle.png">
+		
+		<button onclick="MakeVisible('Dave')">Dave</button>
+		<button onclick="MakeVisible('Thomas')">Thomas</button>
+		<button onclick="MakeVisible('Harrison')">Harrison</button>
+		<button onclick="MakeVisible('Rob')">Rob</button>
+		<button onclick="MakeVisible('Alok')">Alok</button>
+		<button onclick="MakeVisible('Kristina')">Kristina</button>
+		<button onclick="MakeVisible('James')">James</button>
+		<button onclick="MakeVisible('Eugene')">Eugene</button>
+		<button onclick="MakeVisible('Veronica')">Veronica</button>		
+		<button onclick="MakeVisible('Jason')">Jason</button>
+		<button onclick="MakeVisible('Marcandre')">Marcandre</button>
+		<button onclick="MakeVisible('Salina')">Salina</button>
+		<button onclick="MakeVisible('Unknown')">Unknown</button>
 		
 		
+		</br>
+		<button onclick="update(0)">Play</button>
 		
 		
 		<script>
