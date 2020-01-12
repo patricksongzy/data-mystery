@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import json
 import time
 from event import Event
@@ -7,14 +8,17 @@ import anomaly_detector
 class Reader:
     def __init__(self):
         self.people = {}
+        self.flattened = []
         self.unknown_events = {}
         self.predicted_events = {}
         self.names = set()
         self.devices = {}
         self.read_devices()
         self.setup_people()
+        self.flatten()
 
     def read_devices(self):
+        '''Reads devices.json and stores into a dictionary.'''
         with open('resources/devices.json', 'r') as json_file:
             data = json.load(json_file)
             for device_name, actions in data.items():
@@ -22,6 +26,15 @@ class Reader:
 
 
     def is_person_occupied(self, device_type, action):
+        '''checks whether person is occupied with an action
+
+        Parameters:
+        device_type (String): The type of device.
+        action (String): An action with the device.
+
+        Returns:
+        boolean: Returns whether someone is occupied
+        '''
         return self.devices[device_type][action]
 
 
@@ -34,18 +47,18 @@ class Reader:
         print(logs)
 
     def flatten(self):
-        final_data = []
-        with open('resources/murder-data.json','r') as json_file:
-            data = json.load(json_file)
-            for k, v in data.items():
-                final_data.append([time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(k))), v['device-id'],v['guest-id']])
-                if v["event"] == "user disconnected":
-                    final_data[-1][1] = 'na'
+        '''returns [[time, place name]] for animation'''
+        for name, person_events in self.people.items():
+            for event_time, event in person_events.items():
+                self.flattened.append([event_time, event.location, name])
         
-        return final_data
+        self.flattened = sorted(self.flattened)
 
 
     def setup_people(self):
+        door_close_queue = {}
+
+        # creates a map of events per person, per timestamp.
         with open('resources/murder-data.json', 'r') as json_file:
             data = json.load(json_file)
             for k, v in data.items():
@@ -61,24 +74,55 @@ class Reader:
                 current_event = Event(location, device_type, action, is_occupied)
 
                 if (guest_name == 'n/a'):
+                    if (device_type == 'door sensor' and location in door_close_queue):
+                        door_closer = door_close_queue.pop(location)
+                        self.people[door_closer][t] = current_event
+                    elif (action == 'unlocked no keycard'):
+                        for name, person_events in self.people.items():
+                            timestamp = binary_search(list(person_events.keys()), 0, len(person_events) - 1, t)
+                            if (person_events[timestamp].location == location):
+                                self.people[name][t] = current_event
+                                break
+
                     self.unknown_events[t] = current_event
-                elif (guest_name not in self.people):
-                    self.people[guest_name] = {t: current_event}
                 else:
-                    self.people[guest_name][t] = current_event
+                    if (device_type == 'door sensor'):
+                        door_close_queue[location] = guest_name
 
+                    if (guest_name not in self.people):
+                        self.people[guest_name] = {t: current_event}
+                    else:
+                        self.people[guest_name][t] = current_event
+                
+        door_occurences = {}
+        device_names = list(self.devices.keys())
         for name, person_events in self.people.items():
-            timestamps = []
-            device_names = list(self.devices.keys())
-            for i in range(len(device_names)):
-                for event_time, event in person_events.items():
-                    print(device_names[i])
-                    if event.device == device_names[i]:
-                        timestamps.append([i, int(time.mktime(time.strptime(event_time, '%Y-%m-%d %H:%M:%S')))])
-            
-            print(timestamps)
+            for event_time, event in person_events.items():
+                if event.device == 'door sensor':
+                    door_occurences[event_time] = [name, event]
 
-            anomaly_detector.test(timestamps)
+        door_occurences = OrderedDict(sorted(door_occurences.items()))
+        
+        # this queue keeps track of whether the door is held or not
+        held_door_queue = {}
+        for t, event_details in door_occurences.items():
+            name, event = event_details
+            if event.action == 'unlocked no keycard':
+                if event.location in held_door_queue:
+                    minimum = 2**31-1
+                    for other_name, person_events in self.people.items():
+                        if other_name != name:
+                            timestamp = binary_search(list(person_events.keys()), 0, len(person_events) - 1, t)
+                            distance = get_distance(person_events[timestamp].location, event.location)
+                            if distance < minimum:
+                                minimum = distance
+                                held_for = other_name
+                    print("DOOR IS HELD with distance {} for person {}!".format(minimum, held_for))
+                
+                held_door_queue[event.location] = name
+            elif (event.action == 'successful keycard unlock'):
+                if event.location in held_door_queue and held_door_queue[event.location] == name:
+                    held_door_queue.pop(event.location)            
 
         # for event_time, v in self.unknown_events.items():
             # if v.device == "phone":
@@ -146,7 +190,7 @@ def get_point(room):
                 y1 = line.split(':')[1].split(',')[1]
             line = coordinates.readline()
         if (x1+y1)==0:
-            raise ValueError("Please enter a valid room number")
+            raise ValueError("Please enter a valid room number: '{}' was not found".format(room))
     coordinates.close()
     return (x1,y1)
 
@@ -157,6 +201,3 @@ def get_distance(point1, point2):
     y2 = int(get_point(point2)[1])
 
     return math.sqrt((y2-y1)**2+(x2-x1)**2)
-
-reader = Reader()
-print(reader.people["Veronica"][0])
