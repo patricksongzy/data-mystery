@@ -6,6 +6,8 @@ function MakeVisible(name) {
 		x.style.visibility = "visible";
 }
 
+
+
 function update(i){
 	
 	var a = ["8:00", "API11", "Dave"];
@@ -29,82 +31,102 @@ function update(i){
 	var events = [a, b, c, d, e, f, g, h, j, k, l, m, n, o, p, q, r];
 	var event;
 	
-	function myLoop () {          
-		setTimeout(function () {   
-			event = events[i];
-			if(event[1]=="API11"){
-				moveToAPI11(event[2]); 
-			}
-			else if(event[1]=="API12"){
-				moveToAPI12(event[2]);	
-			}else if(event[1]=="API13"){	
-				moveToAPI13(event[2]);	
-			}else if(event[1]=="API14"){
-				
-				moveToAPI14(event[2]);
-					
-			}else if(event[1]=="101"){
-				
-				moveTo101(event[2]);
-					
-			}else if(event[1]=="100"){
-				
-				moveTo100(event[2]);
-					
-			}else if(event[1]=="151"){
-				
-				moveTo151(event[2]);
-					
-			}else if(event[1]=="155"){
-				
-				moveTo155(event[2]);
-					
-			}else if(event[1]=="150"){
-				
-				moveTo150(event[2]);
-					
-			}else if(event[1]=="156"){
-				
-				moveTo156(event[2]);
-					
-			}else if(event[1]=="156B"){
-				
-				moveTo156B(event[2]);
-					
-			}else if(event[1]=="154"){
-				
-				moveTo154(event[2]);
-					
-			}else if(event[1]=="105"){
-				
-				moveTo105(event[2]);
-					
-			}else if(event[1]=="130"){
-				
-				moveTo130(event[2]);
-					
-			}else if(event[1]=="110"){
-				
-				moveTo110(event[2]);
-					
-			}else if(event[1]=="152"){
-				
-				moveTo152(event[2]);
-					
-			}else if(event[1]=="Elevator"){
-				
-				moveToElevator(event[2]);
-			}			
-			i++;                     
-			if (i < events.length) {            
-				myLoop();            
-			}                        
-	    }, 1000)
-	}
-
-	myLoop();    
+	function myLoop () {   
+		if(!checkIfPaused){
 			
+			setTimeout(function () {  
+			
+				event = events[i];
+				
+				if(event[1]=="API11"){
+					
+					moveToAPI11(event[2]); 
+				}
+				else if(event[1]=="API12"){
+					
+					moveToAPI12(event[2]);	
+					
+				}else if(event[1]=="API13"){
+					
+					moveToAPI13(event[2]);
+					
+				}else if(event[1]=="API14"){
+					
+					moveToAPI14(event[2]);
+						
+				}else if(event[1]=="101"){
+					
+					moveTo101(event[2]);
+						
+				}else if(event[1]=="100"){
+					
+					moveTo100(event[2]);
+						
+				}else if(event[1]=="151"){
+					
+					moveTo151(event[2]);
+						
+				}else if(event[1]=="155"){
+					
+					moveTo155(event[2]);
+						
+				}else if(event[1]=="150"){
+					
+					moveTo150(event[2]);
+						
+				}else if(event[1]=="156"){
+					
+					moveTo156(event[2]);
+						
+				}else if(event[1]=="156B"){
+					
+					moveTo156B(event[2]);
+						
+				}else if(event[1]=="154"){
+					
+					moveTo154(event[2]);
+						
+				}else if(event[1]=="105"){
+					
+					moveTo105(event[2]);
+						
+				}else if(event[1]=="130"){
+					
+					moveTo130(event[2]);
+						
+				}else if(event[1]=="110"){
+					
+					moveTo110(event[2]);
+						
+				}else if(event[1]=="152"){
+					
+					moveTo152(event[2]);
+						
+				}else if(event[1]=="Elevator"){
+					
+					moveToElevator(event[2]);
+				}			
+				i++;                     
+				if (i < events.length) {            
+					myLoop();            
+				}                        
+			}, 1000)
+		}
+	}
+	myLoop();    
+	
 }
+
+function pause(){
+	checkIfPaused(true);
+}
+
+function checkIfPaused(boolean pause){
+	return pause;
+}
+
+
+
 		
 function moveToElevator(location){
 	document.getElementById(location).style.left = "285px";
@@ -174,9 +196,6 @@ function moveToAPI14(location){
 	document.getElementById(location).style.left = "283px";
 	document.getElementById(location).style.top = "70px";
 }
-
-
-
 function moveTo210(location){
 	document.getElementById(location).style.left = "760px";
 	document.getElementById(location).style.top = "43px";
