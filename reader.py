@@ -36,9 +36,14 @@ class Reader:
         with open('resources/murder-data.json','r') as json_file:
             data = json.load(json_file)
             for k, v in data.items():
-                final_data.append([time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(k))), v['device-id'], v['guest-id']])
+                final_data.append([time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(k))), 
+                                    v['device-id'], 
+                                    v['guest-id'],
+                                    False])
+                if v["event"] == "user disconnected":
+                    final_data[-1][-1] = True
+        
         return final_data
-
 
 
     def setup_people(self):
