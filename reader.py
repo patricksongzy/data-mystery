@@ -56,14 +56,13 @@ class Reader:
         
         for event_time, v in self.unknown_events.items():
             for name, events in self.people.items():
-                # TODO find closest
                 timestamps = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
-                print(name)
-                print(events[timestamps[0]])
+                print(get_distance(events[timestamps[0]].location, v.location))
 
             print(event_time)
             print(v)
     
+        print(get_distance("231", "235"))
         self.logs_by_person("Veronica")
 
 
@@ -109,3 +108,6 @@ def binary_search(array, low_index, high_index, expected_value):
         y2 = get_point(point2)[1]
 
         return math.sqrt((y2-y1)**2+(x2-x1)**2)
+
+reader = Reader()
+print(reader.people["Veronica"][0])
