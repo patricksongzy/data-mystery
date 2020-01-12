@@ -31,6 +31,15 @@ class Reader:
         
         print(logs)
 
+    def flatten():
+        final_data = []
+        with open('resources/murder-data.json','r') as json_file:
+            data = json.load(json_file)
+            for k, v in data.items():
+                final_data.append([time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int(k))), v['device-id'], v['guest-id']])
+        return final_data
+
+
 
     def setup_people(self):
         with open('resources/murder-data.json', 'r') as json_file:
@@ -57,12 +66,6 @@ class Reader:
         for event_time, v in self.unknown_events.items():
             for name, events in self.people.items():
                 timestamps = binary_search(list(events.keys()), 0, len(events) - 1, event_time)
-                print(get_distance(events[timestamps[0]].location, v.location))
-
-            print(event_time)
-            print(v)
-    
-        print(get_distance("231", "235"))
         self.logs_by_person("Veronica")
 
 
@@ -84,6 +87,7 @@ def binary_search(array, low_index, high_index, expected_value):
             return (array[high_index],)
 
         return array[high_index], array[low_index]
+
 
 def room_change(room1, room2):
     try:
