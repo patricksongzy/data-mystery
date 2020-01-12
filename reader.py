@@ -49,6 +49,7 @@ class Reader:
     def setup_people(self):
         door_close_queue = {}
 
+        # creates a map of events per person, per timestamp.
         with open('resources/murder-data.json', 'r') as json_file:
             data = json.load(json_file)
             for k, v in data.items():
@@ -89,12 +90,30 @@ class Reader:
         for name, person_events in self.people.items():
             for event_time, event in person_events.items():
                 if event.device == 'door sensor':
-                    door_occurences[int(time.mktime(time.strptime(event_time, '%Y-%m-%d %H:%M:%S')))] = [name, event]
+                    door_occurences[event_time] = [name, event]
 
         door_occurences = OrderedDict(sorted(door_occurences.items()))
+        
+        # this queue keeps track of whether the door is held or not
+        held_door_queue = {}
         for t, event_details in door_occurences.items():
-            # if event.action == 'unlocked no keycard':
-            print(str(t) + ": " + event_details[0] + " " + str(event_details[1]))
+            name, event = event_details
+            if event.action == 'unlocked no keycard':
+                if event.location in held_door_queue:
+                    minimum = 2**31-1
+                    for other_name, person_events in self.people.items():
+                        if other_name != name:
+                            timestamp = binary_search(list(person_events.keys()), 0, len(person_events) - 1, t)
+                            distance = get_distance(person_events[timestamp].location, event.location)
+                            if distance < minimum:
+                                minimum = distance
+                                held_for = other_name
+                    print("DOOR IS HELD with distance {} for person {}!".format(minimum, held_for))
+                
+                held_door_queue[event.location] = name
+            elif (event.action == 'successful keycard unlock'):
+                if event.location in held_door_queue and held_door_queue[event.location] == name:
+                    held_door_queue.pop(event.location)            
 
         # for event_time, v in self.unknown_events.items():
             # if v.device == "phone":
@@ -162,7 +181,7 @@ def get_point(room):
                 y1 = line.split(':')[1].split(',')[1]
             line = coordinates.readline()
         if (x1+y1)==0:
-            raise ValueError("Please enter a valid room number")
+            raise ValueError("Please enter a valid room number: '{}' was not found".format(room))
     coordinates.close()
     return (x1,y1)
 
